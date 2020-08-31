@@ -1,0 +1,34 @@
+html, body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    background-color: #d9d9d9;
+  
+    /* This centers our sketch horizontally. */
+    justify-content: center;
+  
+    /* This centers our sketch vertically. */
+    align-items: center;
+
+    /*Text centered aligment*/
+    text-align: center;
+
+    
+  }
+  a { /* Globally */
+    font-family: Marker Felt, fantasy;
+    color:black;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;   
+  } 
+
+/* Each state */
+
+a:visited { text-decoration: none; color:black; }
+a:hover { text-decoration: none; color:blue; }
+a:focus { text-decoration: none; color:yellow; }
+a:hover, a:active { text-decoration: none; color: #404040 }
