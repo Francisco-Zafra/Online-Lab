@@ -12,7 +12,8 @@ class Apple{
             x = int(random(0, size - 1))
             y = int(random(0, size - 1))
         }
-
+        this.x = x
+        this.y = y
         mesa[x][y] = 'a'
     }
 }

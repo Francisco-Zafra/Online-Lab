@@ -8,7 +8,7 @@ let apple
 let ai
 
 let cont = 0
-let vel_max = 5
+let vel_max = 3
 
 let dir = []
 let dir_actual
@@ -25,18 +25,21 @@ function setup(){
   snake = new Snake(size/2, size/2, 10)
   apple = new Apple()
   apple.spawn(mesa, size)
-  ai = new Ai()
 }
 
 function draw(){
   background(22)
   drawTable()
   if(cont > vel_max){
-    if(dir.length > -1){
-      ai.explore(mesa, snake.body[0], snake.body[1], dir, apple)
-      dir_actual = dir.pop()
+    if(dir.length == 0){
+      ai = new Ai(mesa, apple)
+      dir = ai.exp(snake.body[0])
+      console.log(dir)
     }
-    snake.move(dir_actual, mesa, size)
+    if(dir.length > 0){
+      dir_actual = dir.shift()
+    }
+    apple = snake.move(dir_actual, mesa, size)
     cont = 0
   }
   cont++
@@ -56,6 +59,10 @@ function drawTable(){
           break;
         case 'a':
           fill(244, 23, 84)
+          square(i*(tam/size), j*(tam/size), (tam/size) - 2)
+          break;
+        case 'h':
+          fill(48, 156, 77)
           square(i*(tam/size), j*(tam/size), (tam/size) - 2)
           break;
       }

@@ -10,6 +10,7 @@ class Snake{
     move(dir, mesa, size){
         let head = this.body[0]
         let newPos
+        let a
         switch(dir){
             case "UP":
                 newPos = head.y-1
@@ -42,17 +43,22 @@ class Snake{
         }
         this.body[0] = head
         if(mesa[this.body[0].x][this.body[0].y] == 'a'){
-            this.crecer(dir,size)
+            a = this.crecer(dir,size)
         }
-        if(mesa[this.body[0].x][this.body[0].y] == 's'){
+        else{
+            a = apple
+        }
+        if(mesa[this.body[0].x][this.body[0].y] == 's'){  
             print("FIN")
             noLoop()
         }
-        mesa[this.body[0].x][this.body[0].y] = 's'
+        mesa[this.body[0].x][this.body[0].y] = 'h'
+        mesa[this.body[1].x][this.body[1].y] = 's'
         mesa[this.body[this.l-1].x][this.body[this.l-1].y] = 'e'
         for(let i = this.l-1; i > 0; i--){
             this.body[i] = this.body[i-1]
         }
+        return a
     }
 
     crecer(dir, size){
@@ -101,5 +107,6 @@ class Snake{
 
         let apple = new Apple()
         apple.spawn(mesa,size)
+        return apple
     }
 }
