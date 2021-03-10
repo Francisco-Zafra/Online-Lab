@@ -5,6 +5,7 @@ let tam = 800
 
 let snake
 let apple
+let ai
 
 let cont = 0
 let vel_max = 5
@@ -24,13 +25,15 @@ function setup(){
   snake = new Snake(size/2, size/2, 10)
   apple = new Apple()
   apple.spawn(mesa, size)
+  ai = new Ai()
 }
 
 function draw(){
   background(22)
   drawTable()
   if(cont > vel_max){
-    if(dir.length > 0){
+    if(dir.length > -1){
+      ai.explore(mesa, snake.body[0], snake.body[1], dir, apple)
       dir_actual = dir.pop()
     }
     snake.move(dir_actual, mesa, size)
