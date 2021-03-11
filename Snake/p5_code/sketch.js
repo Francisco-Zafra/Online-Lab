@@ -8,7 +8,7 @@ let apple
 let ai
 
 let cont = 0
-let vel_max = 3
+let vel_max = 1
 
 let dir = []
 let dir_actual
@@ -31,14 +31,17 @@ function draw(){
   background(22)
   drawTable()
   if(cont > vel_max){
-    if(dir.length == 0){
-      ai = new Ai(mesa, apple)
-      dir = ai.exp(snake.body[0])
-      console.log(dir)
-    }
-    if(dir.length > 0){
-      dir_actual = dir.shift()
-    }
+    //if(dir.length == dir.length/2 || dir.length == 0){
+      // ai = new Ai(mesa, apple)
+      // dir = ai.exp(snake.body[0])
+      // console.log(dir)
+      ai = new Backtracking(mesa, snake, apple)
+      dir = ai.backtracking()
+      //console.log("---"+dir+"---")
+    //}
+    //if(dir.length > 0){
+      dir_actual = dir//.shift()
+    //}
     apple = snake.move(dir_actual, mesa, size)
     cont = 0
   }
@@ -46,6 +49,7 @@ function draw(){
 }
 
 function drawTable(){
+  let mod = 255 / ((size-1) * (size-1))
   for(let i = 0; i < size; i++){
     for(let j = 0; j < size; j++){
       switch(mesa[i][j]){
@@ -54,7 +58,7 @@ function drawTable(){
           square(i*(tam/size), j*(tam/size), (tam/size) - 2)
           break;
         case 's':
-          fill(149, 233, 27)
+          fill(125, 255, 255-(i+1)*j * mod)
           square(i*(tam/size), j*(tam/size), (tam/size) - 2)
           break;
         case 'a':
@@ -62,7 +66,7 @@ function drawTable(){
           square(i*(tam/size), j*(tam/size), (tam/size) - 2)
           break;
         case 'h':
-          fill(48, 156, 77)
+          fill(125, 255, 255-(i+1)*j * mod)
           square(i*(tam/size), j*(tam/size), (tam/size) - 2)
           break;
       }

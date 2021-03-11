@@ -49,7 +49,7 @@ class Snake{
             a = apple
         }
         if(mesa[this.body[0].x][this.body[0].y] == 's'){  
-            print("FIN")
+            print("FIN: " + this.body.length)
             noLoop()
         }
         mesa[this.body[0].x][this.body[0].y] = 'h'
