@@ -13,8 +13,11 @@ let vel_max = 1
 let dir = []
 let dir_actual
 
+let depth
+let button
+
 function setup(){
-  createCanvas(tam, tam)
+  createCanvas(tam +250, tam).position(150,0, 'relative')
   dir_actual = "UP"
   for(let i = 0; i < size; i++){
     mesa[i] = []
@@ -25,17 +28,32 @@ function setup(){
   snake = new Snake(size/2, size/2, 10)
   apple = new Apple()
   apple.spawn(mesa, size)
+  depth = createSlider(1, 12, 11, 1)
+  depth.position(-40,-210,'relative')
+
+  button = createButton('Restart');
+  button.position(-190, 300, 'relative');
+  button.style('font-size', '36px')
+  button.style('font-family', 'Monospace')
+  button.mousePressed(reload);
 }
 
 function draw(){
   background(22)
   drawTable()
+  textSize(48)
+  fill(232,240,240)
+  text("Score: " + snake.body.length, 805,400)
+  textSize(28)
+  text("Profundidad: " + depth.value(), 830,150)
+  textSize(42)
+  text("Backtracking", 805, 100)
   if(cont > vel_max){
     //if(dir.length == dir.length/2 || dir.length == 0){
       // ai = new Ai(mesa, apple)
       // dir = ai.exp(snake.body[0])
       // console.log(dir)
-      ai = new Backtracking(mesa, snake, apple)
+      ai = new Backtracking(mesa, snake, apple, depth.value())
       dir = ai.backtracking()
       //console.log("---"+dir+"---")
     //}
@@ -86,4 +104,7 @@ function keyPressed() {
       dir.push("DOWN")
     }
   }
+}
+function reload() {
+  location.reload()
 }

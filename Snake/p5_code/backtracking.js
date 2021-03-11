@@ -1,10 +1,13 @@
 class Backtracking{
-    constructor(m, s, a){
+    constructor(m, s, a, d){
         this.mesa = this.copyOfArray(m)
         this.snake = s
         this.apple = a
         this.direcciones = ["UP", "RIGHT", "DOWN", "LEFT"]
         this.resultado = ""
+        this.depth = d
+
+        
     }
 
     backtracking(){
@@ -17,7 +20,7 @@ class Backtracking{
         if(this.mesa[head.x][head.y] == 'a'){
             return 0
         }
-        else if (k == 11){
+        else if (k == this.depth){
             return this.distancia(head)
         }
         else{
